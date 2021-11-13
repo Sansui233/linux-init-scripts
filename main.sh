@@ -30,11 +30,14 @@ done
 # optional installation
 for installer in ./install_optional/*
 do
-    printYellow "[Confirm] Execute $installer?(y/n)"
-    read -r opt
-    if test $opt = 'y'
+    if [[ -f "$installer" && -x "$installer" ]]
     then
-        $installer
+        printYellow "[Confirm] Execute $installer?(y/n)"
+        read -r opt
+        if test $opt = 'y'
+        then
+            $installer
+        fi
     fi
 done
 
