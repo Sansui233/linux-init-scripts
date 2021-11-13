@@ -43,14 +43,14 @@ printYellow "[Confirm] Reset bash, vim and iptables config?(y/n)"
 read -r opt
 if test $opt = 'y'
 then
-    for file in $WD/home_config/
+    for file in $WD/home_config/*
     do
         printBlue "Copying $file"
         cp $file /$USER/
     done
     source /$USER/.bash_profile
     
-    for file in $WD/iptables/
+    for file in $WD/iptables/*
     do
         printBlue "Copying $file"
         cp $file /etc/network/

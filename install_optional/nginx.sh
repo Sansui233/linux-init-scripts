@@ -20,7 +20,7 @@ case $input in
         if [[ ! -f "$WD/scripts/nginxCFrealIP.sh" ]]; then
             printRed "[Error] $WD/scripts/nginxCFrealIP.sh doesn't exits"
         else
-            ./nginxCFrealIP.sh
+            $WD/scripts/nginxCFrealIP.sh
             newCron "0 5 * * 1 bin/bash $WD/scripts/nginxCFrealIP.sh"
             printBlue "[INFO] stored in /etc/nginx/sites-available/cloudflare_ip.conf"
         fi
