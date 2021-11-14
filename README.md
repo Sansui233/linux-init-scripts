@@ -10,8 +10,11 @@ Run `main.sh` to start.
 Folder structure:
 - install: files in this dir will be executed without confirmation.
 - install_optional: files in this dir will be executed after confirmation.
-  - Installer script should support files migration in the same-prefix folder.
+  - Installer script should support files migration in the same-prefix folder.  
     Ex. `telegram-cli.sh` can copy all files in telegram_conf into installation(/root/tg) directory.
-- home_config: bash profile and vim configurations (or any file in home folder)
+- home_config: bash profile and vim configurations (or any file in home directory)
 - iptables: iptable configurations
 - scripts: some additional tools like log cleaner
+- lib: common function used by `main.sh` and installers
+
+If you want execute a single installer, run `source conf.sh` first.

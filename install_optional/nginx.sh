@@ -1,6 +1,6 @@
 #!/bin/bash
-. $WD/log.sh
-. $WD/newCron.sh
+. $WD/lib/log.sh
+. $WD/lib/newCron.sh
 
 ####### Install nginx
 if command -v nginx >/dev/null 2>&1; then

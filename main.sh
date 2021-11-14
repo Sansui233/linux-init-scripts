@@ -1,10 +1,13 @@
 #!/bin/bash
-export USER=root
-export WD=$(pwd)
-export INSTALLER=apt
 
-. ./log.sh
-. ./newCron.sh
+# cd to script folder
+SHELL_FOLDER=$(cd "$(dirname "$0")";pwd)
+cd "$SHELL_FOLDER"
+
+# import
+. ./conf.sh
+. lib/log.sh
+. lib/newCron.sh
 
 install(){
     cmd=$1
@@ -22,13 +25,13 @@ install(){
 install git
 install curl
 install vim
-for installer in ./install/*
+for installer in $WD/install/*
 do
     $installer
 done
 
 # optional installation
-for installer in ./install_optional/*
+for installer in $WD/install_optional/*
 do
     if [[ -f "$installer" && -x "$installer" ]]
     then
