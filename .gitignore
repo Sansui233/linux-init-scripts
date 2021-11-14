@@ -1,2 +1,3 @@
 install_optional/*_conf
 release/
+*_private*
