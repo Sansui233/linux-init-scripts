@@ -9,6 +9,14 @@ cd "$SHELL_FOLDER"
 . lib/log.sh
 . lib/newCron.sh
 
+case $1 in
+    --debug) export DEBUG_MODE=true
+    ;;
+    *) echo default
+    ;;
+esac
+
+
 install(){
     cmd=$1
     if command -v $cmd >/dev/null 2>&1
@@ -67,19 +75,16 @@ fi
 
 #!/bin/sh
 add2bash(){
-    if ! grep "$1" ~/.bash_profile  >/dev/null
+    if grep -Fxq "$1" ~/.bash_profile
     then
-        echo "$1" > ~/.bash_profile
+        printDebug "scripts dir is in env var"
     else
-        printError "no input file"
+        echo "$1" >> ~/.bash_profile
     fi
 }
 
 #执行该函数
 add2bash "export PATH=$WD/scripts:\$PATH"
-
-
-echo "export PATH=$WD/scripts:\$PATH" >> ~/.bash_profile
 
 # 4. set cron job
 newCron "* */72 * * * $WD/scripts/cleanlog.sh"

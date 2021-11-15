@@ -1,4 +1,7 @@
 # Constants from https://stackoverflow.com/questions/16843382/colored-shell-script-output-library
+if [[ -z $DEBUG_MODE ]]; then
+    DEBUG_MODE=false
+fi
 
 RCol='\e[0m'    # Text Reset
 
@@ -35,4 +38,9 @@ printWarning(){
 }
 printError(){
     printf "$Red[Error] $1$RCol\n"
+}
+printDebug(){
+    if test $DEBUG_MODE = "true"; then
+        printf "$Pur[Warning] $1$RCol\n"
+    fi
 }
