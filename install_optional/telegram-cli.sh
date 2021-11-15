@@ -14,7 +14,7 @@ fi
 
 cd /$USER
 
-printBlue "Installing telegram-cli into $TG"
+printInfo "Installing telegram-cli into $TG"
 git clone --recursive https://github.com/vysheng/tg.git
 cd tg
 
@@ -51,14 +51,14 @@ cd $TG
 
 printBlue "[tg-install] Compiling telegram"
 $TG/configure --disable-openssl --prefix=/usr CFLAGS="$CFLAGS -w"
-printYellow "Check the list above and continue?[y/n]"
+printConfirm "Check the list above and continue?[y/n]"
 read -r opt
 if test $opt = 'n' 
 then
     exit 0
 fi
 make
-printBlue "Telegram-cli is installed into $TG/bin/telegram-cli"
+printInfo "Telegram-cli is installed into $TG/bin/telegram-cli"
 
 if test -d $WD/install_optional/telegram-cli_conf
 then

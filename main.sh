@@ -22,6 +22,7 @@ install(){
 
 # ========== MAIN ==========
 
+# 1. Install neccessary packs
 install git
 install curl
 install vim
@@ -30,12 +31,12 @@ do
     $installer
 done
 
-# optional installation
+# 2. Optional install
 for installer in $WD/install_optional/*
 do
     if [[ -f "$installer" && -x "$installer" ]]
     then
-        printYellow "[Confirm] Execute $installer?(y/n)"
+        printConfirm "[Confirm] Execute $installer?(y/n)"
         read -r opt
         if test $opt = 'y'
         then
@@ -44,28 +45,43 @@ do
     fi
 done
 
-# copy config
-printYellow "[Confirm] Reset bash, vim and iptables config?(y/n)"
+# 3. Copy config
+printConfirm "[Confirm] Reset bash, vim and iptables config?(y/n)"
 read -r opt
 if test $opt = 'y'
 then
     for file in $WD/home_config/*
     do
-        printBlue "Copying $file"
+        printInfo "Copying $file"
         cp $file /$USER/
     done
     source /$USER/.bash_profile
     
     for file in $WD/iptables/*
     do
-        printBlue "Copying $file"
+        printInfo "Copying $file"
         cp $file /etc/network/
     done
     iptables-apply
 fi
 
+#!/bin/sh
+add2bash(){
+    if ! grep "$1" ~/.bash_profile  >/dev/null
+    then
+        echo "$1" > ~/.bash_profile
+    else
+        printError "no input file"
+    fi
+}
 
-# set cron job
+#执行该函数
+add2bash "export PATH=$WD/scripts:\$PATH"
+
+
+echo "export PATH=$WD/scripts:\$PATH" >> ~/.bash_profile
+
+# 4. set cron job
 newCron "* */72 * * * $WD/scripts/cleanlog.sh"
 
 printYellow "=================================================="

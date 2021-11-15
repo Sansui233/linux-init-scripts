@@ -1,5 +1,3 @@
-export PATH=$PATH:/usr/local/go/bin
-
 # Oh-my-bash
 export OSH=/root/.oh-my-bash
 OSH_THEME="agnoster"

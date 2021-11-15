@@ -23,3 +23,16 @@ printBlue(){
 printRed(){
     printf "$Red$1$RCol\n"
 }
+
+printInfo(){
+    printf "$Blu[Info] $1$RCol\n"
+}
+printConfirm(){
+    printf "$Yel[Confirm] $1$RCol\n"
+}
+printWarning(){
+    printf "$Yel[Warning] $1$RCol\n"
+}
+printError(){
+    printf "$Red[Error] $1$RCol\n"
+}

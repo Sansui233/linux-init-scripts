@@ -4,9 +4,13 @@ rm *.gz
 rm nginx/*.gz
 rm netdata/*.gz
 
+cleanNohup(){
+    dir="$1"
+    split -b 1024k ${dir}/nohup.out -d -a 3 --additional-suffix=".log"
+    file=$(ls ${dir}/*.log | sort | tail -n1)
+    cat $file >| nohup.out
+    rm ${dir}/*.log
+}
+
 # Example: deal with nohup.out log
-dir=/usr/local/etc/trojan/
-split -b 1024k ${dir}/nohup.out -d -a 3 -additional-suffix=.log
-file=$(ls ${dir}/*.log | sort | tail -n1)
-cat ${dir}/$file >| nohup.out
-rm ${dir}/*.log
+cleanNohup /usr/local/etc/trojan
