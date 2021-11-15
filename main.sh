@@ -44,7 +44,7 @@ for installer in $WD/install_optional/*
 do
     if [[ -f "$installer" && -x "$installer" ]]
     then
-        printConfirm "[Confirm] Execute $installer?(y/n)"
+        printConfirm "Execute $installer?(y/n)"
         read -r opt
         if test $opt = 'y'
         then
@@ -54,7 +54,7 @@ do
 done
 
 # 3. Copy config
-printConfirm "[Confirm] Reset bash, vim and iptables config?(y/n)"
+printConfirm "Reset bash, vim and iptables config?(y/n)"
 read -r opt
 if test $opt = 'y'
 then

@@ -12,7 +12,7 @@ fi
 
 
 ######## Install CF real IP conf for nginx
-printConfirm "[Confirm] Generate CF real IP conf for nginx?(y/n)"
+printConfirm "Generate CF real IP conf for nginx?(y/n)"
 read -r input
 case $input in
     [yY][eE][sS]|[yY])
