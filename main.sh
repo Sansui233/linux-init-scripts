@@ -7,7 +7,6 @@ cd "$SHELL_FOLDER"
 # import
 . ./conf.sh
 . lib/log.sh
-. lib/newCron.sh
 
 case $1 in
     --debug) export DEBUG_MODE=true
@@ -83,11 +82,10 @@ add2bash(){
     fi
 }
 
-#执行该函数
 add2bash "export PATH=$WD/scripts:\$PATH"
 
-# 4. set cron job
-newCron "* */72 * * * $WD/scripts/cleanlog.sh"
+# 4. Set cron job
+$WD/scripts/setCrons.sh
 
 printYellow "=================================================="
 printYellow "[TODO] replace oh-my-bash theme"
