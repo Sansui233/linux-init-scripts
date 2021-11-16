@@ -37,6 +37,7 @@
 -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 933 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 19999 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 25500 -j ACCEPT
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 # Allow CloudFlare
