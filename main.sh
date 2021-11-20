@@ -80,5 +80,6 @@ $WD/scripts/setCrons.sh
 printYellow "=================================================="
 printYellow "[TODO] replace oh-my-bash theme"
 printYellow "[TODO] initialize vundle in vim: PluginInstall"
+printYellow "[TODO] set nginx sites-enable"
 printYellow "=================================================="
 echo "DONE"
