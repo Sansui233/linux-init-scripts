@@ -1,8 +1,6 @@
 # This file should be set in crontable
-cd /var/log
-rm *.gz
-rm nginx/*.gz
-rm netdata/*.gz
+rm /var/log/*.gz
+rm /var/log/nginx/*.gz
 
 cleanNohup(){
     dir="$1"
