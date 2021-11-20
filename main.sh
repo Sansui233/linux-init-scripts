@@ -33,6 +33,7 @@ install(){
 install git
 install curl
 install vim
+install unzip
 for installer in $WD/install/*
 do
     $installer
