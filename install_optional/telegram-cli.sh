@@ -1,4 +1,4 @@
-. $WD/log.sh
+. $WD/lib/log.sh
 
 TG=/$USER/tg
 

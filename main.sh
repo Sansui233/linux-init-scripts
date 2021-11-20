@@ -57,19 +57,9 @@ printConfirm "Reset bash, vim and iptables config?(y/n)"
 read -r opt
 if test $opt = 'y'
 then
-    for file in $WD/home_config/*
-    do
-        printInfo "Copying $file"
-        cp $file /$USER/
-    done
+    printInfo "Copying $WD/home_config/ into /$USER/"
+    cp -r home_config/. ~/
     source /$USER/.bash_profile
-    
-    for file in $WD/iptables/*
-    do
-        printInfo "Copying $file"
-        cp $file /etc/network/
-    done
-    iptables-apply
 fi
 
 #!/bin/sh
@@ -89,6 +79,6 @@ $WD/scripts/setCrons.sh
 
 printYellow "=================================================="
 printYellow "[TODO] replace oh-my-bash theme"
-printYellow "[TODO] initialize vim vundle: Plugin Install"
+printYellow "[TODO] initialize vundle in vim: PluginInstall"
 printYellow "=================================================="
 echo "DONE"
