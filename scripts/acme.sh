@@ -31,9 +31,9 @@ if [[ $# != 0 ]]; then
         ;;
         -all) generate $domain && install $domain && renew $domain
         ;;
-        *) echo 'Usage: acme_private.sh -g|-i|-r|--all [domain]'
+        *) echo 'Usage: acme_private.sh -g[enerate]|-i[nstall]|-r[enew]|-all [domain]'
         ;;
     esac
 else
-    echo 'Usage: acme_private.sh -g|-i|-r|--all [domain]'
+    echo 'Usage: acme_private.sh -g[enerate]|-i[nstall]|-r[enew]|-all [domain]'
 fi
