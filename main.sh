@@ -79,8 +79,8 @@ add2bash "export PATH=$WD/scripts:\$PATH"
 $WD/scripts/setCrons.sh
 
 printYellow "=================================================="
-printYellow "[TODO] replace oh-my-bash theme"
+printYellow "[TODO] replace oh-my-bash theme if .bash_profile is not replaced"
 printYellow "[TODO] initialize vundle in vim: PluginInstall"
-printYellow "[TODO] set nginx sites-enable"
+printYellow "[TODO] set /etc/nginx/sites-enabled"
 printYellow "=================================================="
 echo "DONE"
