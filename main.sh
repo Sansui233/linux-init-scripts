@@ -4,7 +4,7 @@
 SHELL_FOLDER=$(cd "$(dirname "$0")";pwd)
 cd "$SHELL_FOLDER"
 
-# import
+# import conf and lib
 . ./conf.sh
 . lib/log.sh
 
@@ -18,12 +18,12 @@ esac
 
 install(){
     cmd=$1
-    if command -v $cmd >/dev/null 2>&1
+    if command -v "$cmd" >/dev/null 2>&1
     then
         echo "$cmd is already installed"
     else
         printBlue "Installing $cmd..."
-        sudo $INSTALLER install $cmd
+        sudo "$INSTALLER" install "$cmd"
     fi
 }
 
@@ -37,7 +37,7 @@ install git
 install curl
 install vim
 install unzip
-for installer in $WD/install/*
+for installer in "$WD"/install/*
 do
     $installer
 done
@@ -46,13 +46,13 @@ done
 # 2. Optional install
 #######################
 
-for installer in $WD/install_optional/*
+for installer in "$WD"/install_optional/*
 do
     if [[ -f "$installer" && -x "$installer" ]]
     then
         printConfirm "Execute $installer?(y/n)"
         read -r opt
-        if test $opt = 'y'
+        if test "$opt" = 'y'
         then
             $installer
         fi
@@ -65,11 +65,11 @@ done
 
 printConfirm "Reset bash, vim and iptables config?(y/n)"
 read -r opt
-if test $opt = 'y'
+if test "$opt" = 'y'
 then
-    printInfo "Copying $WD/home_config/ into /$USER/"
+    printInfo "Copying $WD /home_config/ into /$USER/"
     cp -r home_config/. ~/
-    source /$USER/.bash_profile
+    source /"$USER"/.bash_profile
 fi
 
 # lib function: append to .bash_profile
@@ -88,7 +88,7 @@ add2bash "export PATH=$WD/scripts:\$PATH"
 #######################
 # 4. Set cron job
 #######################
-$WD/scripts/setCrons.sh
+"$WD"/scripts/setCrons.sh
 
 printYellow "=================================================="
 printYellow "[TODO] replace oh-my-bash theme if .bash_profile is not replaced"
