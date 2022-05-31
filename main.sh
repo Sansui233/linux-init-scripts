@@ -29,7 +29,10 @@ install(){
 
 # ========== MAIN ==========
 
+#######################
 # 1. Install neccessary packs
+#######################
+
 install git
 install curl
 install vim
@@ -39,7 +42,10 @@ do
     $installer
 done
 
+#######################
 # 2. Optional install
+#######################
+
 for installer in $WD/install_optional/*
 do
     if [[ -f "$installer" && -x "$installer" ]]
@@ -53,7 +59,10 @@ do
     fi
 done
 
-# 3. Copy config
+#######################
+# 3. Copy home config
+#######################
+
 printConfirm "Reset bash, vim and iptables config?(y/n)"
 read -r opt
 if test $opt = 'y'
@@ -63,8 +72,9 @@ then
     source /$USER/.bash_profile
 fi
 
+# lib function: append to .bash_profile
 #!/bin/sh
-add2bash(){
+add2bash(){    
     if grep -Fxq "$1" ~/.bash_profile
     then
         printDebug "scripts dir is in env var"
@@ -75,7 +85,9 @@ add2bash(){
 
 add2bash "export PATH=$WD/scripts:\$PATH"
 
+#######################
 # 4. Set cron job
+#######################
 $WD/scripts/setCrons.sh
 
 printYellow "=================================================="

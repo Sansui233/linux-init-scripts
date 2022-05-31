@@ -9,4 +9,4 @@ printYellow "[TODO] Modify your config in /etc/nginx/sites-enabled/"
 
 sudo cp $WD/install_optional/trojan-conf/trojan.service /etc/systemd/system/
 sudo systemctl daemon-reload
-printBlue "[Info] Trojan-go is installed in /$USER/trojan-go"
+printInfo "Trojan-go is installed in /$USER/trojan-go"
