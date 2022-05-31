@@ -1,0 +1,10 @@
+[Unit]
+Description=trojan server
+
+[Service]
+ExecStart=/root/trojan-go/trojan-go -config /root/trojan-go/config.json
+Restart=always
+WorkingDirectory=/root/trojan-go
+
+[Install]
+WantedBy=multi-user.target
