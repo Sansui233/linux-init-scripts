@@ -13,6 +13,10 @@
         "concurrency": 8,
         "idle_timeout": 60
     },
+    "websocket": {
+        "enabled": true,
+        "path": "/ws"
+    },
     "ssl": {
         "cert": "/etc/v2ray/v2ray.crt",
         "key": "/etc/v2ray/v2ray.key",
