@@ -4,7 +4,7 @@
 SHELL_FOLDER=$(cd "$(dirname "$0")";pwd)
 cd "$SHELL_FOLDER"
 
-# import
+# import conf and lib
 . ./conf.sh
 . lib/log.sh
 
@@ -17,53 +17,77 @@ esac
 
 
 install(){
-    cmd=$1
-    if command -v $cmd >/dev/null 2>&1
+    pkg=$1
+    cmd=$2
+
+    if [ "$2" = "" ]; then
+        cmd=$pkg
+    fi
+
+
+    if command -v "$cmd" >/dev/null 2>&1
     then
-        echo "$cmd is already installed"
+        echo "$pkg is already installed"
     else
-        printBlue "Installing $cmd..."
-        sudo $INSTALLER install $cmd
+        printBlue "Installing $pkg..."
+        sudo "$INSTALLER" install "$pkg"
     fi
 }
 
 # ========== MAIN ==========
 
+#######################
 # 1. Install neccessary packs
+#######################
+apt-get update
 install git
 install curl
 install vim
-for installer in $WD/install/*
+install unzip
+# install snapd snap
+# install snapcraft
+install ncdu
+install python3
+install npm
+
+for installer in "$WD"/install/*
 do
     $installer
 done
 
+#######################
 # 2. Optional install
-for installer in $WD/install_optional/*
+#######################
+
+for installer in "$WD"/install_optional/*
 do
     if [[ -f "$installer" && -x "$installer" ]]
     then
-        printConfirm "Execute $installer?(y/n)"
+        printConfirm "Run $installer?(y/n)"
         read -r opt
-        if test $opt = 'y'
+        if test "$opt" = 'y'
         then
             $installer
         fi
     fi
 done
 
-# 3. Copy config
-printConfirm "Reset bash, vim and iptables config?(y/n)"
+#######################
+# 3. Copy home config
+#######################
+
+printConfirm "Reset bash and vim?(y/n)"
 read -r opt
-if test $opt = 'y'
+if test "$opt" = 'y'
 then
-    printInfo "Copying $WD/home_config/ into /$USER/"
+    printInfo "Copying $WD /home_config/ into /$USER/"
     cp -r home_config/. ~/
-    source /$USER/.bash_profile
+    source /"$USER"/.bash_profile
 fi
 
+# lib function: append to .bash_profile
 #!/bin/sh
-add2bash(){
+add2bash(){    
     if grep -Fxq "$1" ~/.bash_profile
     then
         printDebug "scripts dir is in env var"
@@ -74,12 +98,14 @@ add2bash(){
 
 add2bash "export PATH=$WD/scripts:\$PATH"
 
+#######################
 # 4. Set cron job
-$WD/scripts/setCrons.sh
+#######################
+"$WD"/scripts/setCrons.sh
 
 printYellow "=================================================="
-printYellow "[TODO] replace oh-my-bash theme"
+printYellow "[TODO] replace oh-my-bash theme if .bash_profile is not replaced"
 printYellow "[TODO] initialize vundle in vim: PluginInstall"
-printYellow "[TODO] set nginx sites-enable"
+printYellow "[TODO] set /etc/nginx/sites-enabled"
 printYellow "=================================================="
 echo "DONE"

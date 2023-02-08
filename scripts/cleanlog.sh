@@ -11,4 +11,4 @@ cleanNohup(){
 }
 
 # Example: deal with nohup.out log
-cleanNohup /usr/local/etc/trojan
+cleanNohup /root/trojan-go

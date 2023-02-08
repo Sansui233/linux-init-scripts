@@ -1,0 +1,26 @@
+{
+  http_port 80
+  https_port 933
+  admin off
+  servers :933 {
+    protocols h1 h2 h3
+  }
+  order forward_proxy before file_server
+}
+:933, domain.com, 1.1.1.1 {
+  tls /etc/v2ray/v2ray.crt /etc/v2ray/v2ray.key
+  forward_proxy {
+    basic_auth nami lnm019283
+    hide_ip
+    hide_via
+    probe_resistance
+  }
+  file_server {
+    root /var/www/html
+  }
+}
+:80 {
+  file_server {
+    root /var/www/html
+  }
+}

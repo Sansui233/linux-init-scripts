@@ -1,0 +1,66 @@
+{
+	"servers": [
+		{
+			"username": "n01",
+			"name": "node01",
+			"type": "kvm",
+			"host": "x.x.x.x",
+			"location": "US",
+			"password": "password",
+			"monthstart": 1
+		},
+		{
+			"username": "n02",
+			"name": "node02",
+			"type": "kvm",
+			"host": "host",
+			"location": "JP",
+			"password": "password",
+			"monthstart": 1
+		},
+		{
+			"disabled": true,
+			"username": "s03",
+			"name": "node3",
+			"type": "hyper",
+			"host": "host3",
+			"location": "🇫🇷",
+			"password": "USER_DEFAULT_PASSWORD",
+			"monthstart": 1
+		},
+		{
+			"disabled": true,
+			"username": "s04",
+			"name": "node4",
+			"type": "kvm",
+			"host": "host4",
+			"location": "🇰🇷",
+			"password": "USER_DEFAULT_PASSWORD",
+			"monthstart": 1
+		}
+	],
+	,
+	"watchdog":
+	[
+	    {
+			"name": "服务器负载高监控",
+			"rule": "cpu>90&load_5>3",
+			"interval": 600,
+			"callback": "https://api.telegram.org/token/sendMessage?parse_mode=HTML&disable_web_page_preview=true&chat_id=id&text=\"[Warning] 服务器高负载中\""
+		},
+		{
+			"name": "服务器硬盘将满",
+			"rule": "(hdd_used/hdd_total)*100>95",
+			"interval": 1800,
+			"callback": "https://api.telegram.org/token/sendMessage?parse_mode=HTML&disable_web_page_preview=true&chat_id=id&text=\"[Warning] 磁盘已用超过95\""
+		},
+		{
+			"name": "月流量使用超过700G",
+			"rule": "(network_in+network_out)/1024/1024/1024>700",
+			"interval": 600,
+			"callback": "https://api.telegram.org/token/sendMessage?parse_mode=HTML&disable_web_page_preview=true&chat_id=183806190&text=\"[Warning] 快改密码\""
+		}
+
+	]
+
+}

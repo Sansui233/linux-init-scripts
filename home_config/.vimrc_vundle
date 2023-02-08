@@ -9,9 +9,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdtree'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 filetype plugin indent on
