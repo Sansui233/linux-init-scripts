@@ -39,7 +39,7 @@ install(){
 #######################
 # 1. Install neccessary packs
 #######################
-apt-get update
+$INSTALLER update
 install git
 install curl
 install vim
@@ -87,7 +87,7 @@ fi
 
 # lib function: append to .bash_profile
 #!/bin/sh
-add2bash(){    
+add2bash(){
     if grep -Fxq "$1" ~/.bash_profile
     then
         printDebug "scripts dir is in env var"

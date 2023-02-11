@@ -1,47 +1,41 @@
 require('one').setup {
-    configFn = function()
-        return {
-            autopairs = require('my.autopairs')
-        }
-    end,
+    proxy = {
+        github = 'https://ghproxy.com',
+    },
+
+    -- 使用:OneShowConfig 可查看部分暴露值
+    --  简单修改部分 one.nvim Config 对象
     config = {
         pluginManager = { use = 'packer' }, -- 'vim-plug' or 'packer'
-        ['mason-installer'] = {
-            ensure_installed = {
-                'lua-language-server'
-            },
-        },
         treesitter = {
-            ensure_installed = { "lua", "vim" }
+            ensure_installed = { "lua", "vim", "javascript", "typescript", "python" }
         },
         colors = require('my.colors').colors,
         rainbow = require('my.colors').rainbow,
         highlights = require('my.colors').highlights,
-        statusline = {
-            lualine = {
-                winbar = {
-                    lualine_c = {
-                        {
-                            'aerial',
-                            sep = ' > ',
-                            depth = nil,
-                            dense = false,
-                            dense_sep = '.',
-                            colored = true,
-                            color = { fg = '#9ac3de', bg = require('my.colors').grey1, gui = 'bold' },
-                        },
-                    }
-                }
-            }
-        },
+        statusline = require('my.statusline'),
         plugins = {
             {
                 'stevearc/aerial.nvim',
                 highlights = {
-                    AerialLine = { bg = '#36366a' },
+                    aerialline = { bg = '#36366a' },
                 }
             },
         },
 
     },
+    -- 函数修改部分 one.nvim Config 对象
+    configFn = function()
+        return {
+            autopairs = require('my.autopairs'),
+            floaterm = require('my.floaterm'),
+            nullLS = require('my.null-ls')(),
+            ['mason-installer'] = require("my.mason"),
+        }
+    end,
+    --  完全重写插件原始的 Config
+    plugins = {
+        { 'nanozuki/tabby.nvim', config = require('my.tabby').config }
+    },
+
 }
